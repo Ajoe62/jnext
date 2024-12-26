@@ -12,20 +12,20 @@ const services = [
   },
   {
     num: '02',
-    title: 'UI/UX Design',
-    description: 'I develop websites and web applications that provide intuitive user experiences and drive conversions.',
+    title: 'Content Creation',
+    description: 'I create visual content that helps brands tell their stories and connect with their audience.',
     href: ""
   },
   {
     num: '03',
-    title: 'Logo Design',
-    description: 'I develop websites and web applications that provide intuitive user experiences and drive conversions.',
+    title: 'Code/AI Tutoring',
+    description: 'I tutor aspiring developers and help them build the skills they need to succeed in the tech industry.',
     href: ""
   },
   {
     num: '04',
     title: 'SEO Optimization',
-    description: 'I develop websites and web applications that provide intuitive user experiences and drive conversions.',
+    description: 'I optimize websites for search engines to help brands increase their online visibility and reach more customers.',
     href: ""
   },
 ]
