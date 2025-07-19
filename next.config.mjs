@@ -7,12 +7,10 @@ const nextConfig = {
     minimumCacheTTL: 31536000, // 1 year cache
   },
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['framer-motion'],
   },
-  // Suppress hydration warnings in development
+  // Enable React strict mode
   reactStrictMode: true,
-  swcMinify: true,
 };
 
 export default nextConfig;
