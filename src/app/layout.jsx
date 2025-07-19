@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
+import ClientOnly from "@/components/ClientOnly";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -18,10 +19,23 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={jetbrainsMono.variable}>
+      <head>
+        <meta name="grammarly-disable-indicator" content="true" />
+        <meta name="grammarly-disable" content="true" />
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/assets/optimized/photo.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+      </head>
+      <body className={jetbrainsMono.variable} suppressHydrationWarning={true}>
         <Header />
-        <StairTransition />
-        <PageTransition>{children}</PageTransition>
+        <ClientOnly>
+          <StairTransition />
+          <PageTransition>{children}</PageTransition>
+        </ClientOnly>
         </body>
     </html>
   );

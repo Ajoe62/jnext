@@ -9,20 +9,31 @@ const Photo = () => {
    <motion.div
    initial={{ opacity: 0}}
    animate={{ opacity: 1,
-    transition: {delay: 2, duration: 0.4, ease: "easeIn" },
+    transition: {delay: 0.2, duration: 0.3, ease: "easeIn" },
    }}>
 
     {/* image */}
     <motion.div 
     initial={{ opacity: 0}}
    animate={{ opacity: 1,
-    transition: {delay: 2.4, duration: 0.4, ease: "easeInOut" },
+    transition: {delay: 0.3, duration: 0.3, ease: "easeInOut" },
    }}
     
-    className="w-[298px h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten
+    className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten
     absolute">
-        <Image src="/assets/photo.png" priority quality={100} fill
-        alt="" className="object-contain"/>
+        <Image 
+        src="/assets/optimized/photo.webp" 
+        priority 
+        quality={100} 
+        fill
+        sizes="(max-width: 768px) 298px, (max-width: 1280px) 398px, 498px"
+        alt="Joseph Akharume - Software Engineer" 
+        className="object-contain"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAG0lEQVR42mP8/58BFTAhgzHgwag7Rt2BMgAA6xkFBSX7jP8AAAAASUVORK5CYII="
+        loading="eager"
+        fetchPriority="high"
+        />
     </motion.div>
 
     {/* circle */}
