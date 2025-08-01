@@ -38,8 +38,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Portfolio Website
 
 This is a professional portfolio website built with Next.js featuring:
+
 - Mobile App Development services
-- Web Development showcase  
+- Web Development showcase
 - Optimized image loading
 - Responsive design
 - Smooth animations

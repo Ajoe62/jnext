@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
 import ClientOnly from "@/components/ClientOnly";
-import ChatWidget from "@/components/ChatWidget";
+import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -23,9 +23,9 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="grammarly-disable-indicator" content="true" />
         <meta name="grammarly-disable" content="true" />
-        <link 
-          rel="preload" 
-          as="image" 
+        <link
+          rel="preload"
+          as="image"
           href="/assets/optimized/photo.webp"
           type="image/webp"
           fetchPriority="high"
@@ -36,9 +36,9 @@ export default function RootLayout({ children }) {
         <ClientOnly>
           <StairTransition />
           <PageTransition>{children}</PageTransition>
-          <ChatWidget />
+          <ChatWidgetWrapper />
         </ClientOnly>
-        </body>
+      </body>
     </html>
   );
 }
