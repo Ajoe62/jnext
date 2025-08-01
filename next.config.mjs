@@ -8,9 +8,8 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["framer-motion", "react-icons"],
   },
-  // Enable aggressive caching
+  // Performance optimizations
   poweredByHeader: false,
-  generateEtags: false,
   compress: true,
 };
 
