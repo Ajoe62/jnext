@@ -31,7 +31,7 @@ const links = [
 const MobileNav = () => {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
-    const closeMenu = () => setIsOpen(false); 
+    const closeMenu = () => setIsOpen(false);
 
     return <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger className="flex justify-center items-center">
@@ -50,13 +50,13 @@ const MobileNav = () => {
             <nav className="flex flex-col justify-center items-center gap-8">
                 {links.map((link, index) => {
                     return (
-                        <Link href={link.path} 
-                        key={index}
-                        prefetch={true}
-                        className={`${link.path === pathname &&
-                             "text-accent border-b-2 border-accent"
-                        } text-xl capitalize hover:text-accent transition-all`}
-                        onClick={closeMenu}
+                        <Link href={link.path}
+                            key={index}
+                            prefetch={true}
+                            className={`${link.path === pathname &&
+                                "text-accent border-b-2 border-accent"
+                                } text-xl capitalize hover:text-accent transition-all`}
+                            onClick={closeMenu}
                         >
                             {link.name}
                         </Link>

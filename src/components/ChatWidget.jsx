@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMessageCircle, FiSend, FiUser, FiX } from 'react-icons/fi';
+import { FiMessageCircle, FiSend, FiUser, FiX, FiMaximize2 } from 'react-icons/fi';
 import { BsRobot } from 'react-icons/bs';
 
 const ChatWidget = () => {
@@ -19,10 +19,17 @@ const ChatWidget = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // Resizable dimensions state
+    const [dimensions, setDimensions] = useState({
+        width: 450,
+        height: 500
+    });
+    const [isResizing, setIsResizing] = useState(false);
+    const [resizeType, setResizeType] = useState(null); // 'width', 'height', 'both'
+
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
-
-    // Scroll to bottom when new messages are added
+    const chatRef = useRef(null);    // Scroll to bottom when new messages are added
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -37,6 +44,45 @@ const ChatWidget = () => {
             inputRef.current.focus();
         }
     }, [isOpen]);
+
+    // Resize handling functions
+    const handleResizeStart = (e, type) => {
+        e.preventDefault();
+        setIsResizing(true);
+        setResizeType(type);
+
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = dimensions.width;
+        const startHeight = dimensions.height;
+
+        const handleResize = (e) => {
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+
+            let newWidth = startWidth;
+            let newHeight = startHeight;
+
+            if (type === 'width' || type === 'both') {
+                newWidth = Math.max(350, Math.min(800, startWidth - deltaX));
+            }
+            if (type === 'height' || type === 'both') {
+                newHeight = Math.max(400, Math.min(700, startHeight - deltaY));
+            }
+
+            setDimensions({ width: newWidth, height: newHeight });
+        };
+
+        const handleResizeEnd = () => {
+            setIsResizing(false);
+            setResizeType(null);
+            document.removeEventListener('mousemove', handleResize);
+            document.removeEventListener('mouseup', handleResizeEnd);
+        };
+
+        document.addEventListener('mousemove', handleResize);
+        document.addEventListener('mouseup', handleResizeEnd);
+    };
 
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -121,8 +167,8 @@ const ChatWidget = () => {
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center z-50 transition-all duration-300 ${isOpen
-                        ? 'bg-red-500 hover:bg-red-600'
-                        : 'bg-accent hover:bg-accent/90'
+                    ? 'bg-red-500 hover:bg-red-600'
+                    : 'bg-accent hover:bg-accent/90'
                     }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -138,11 +184,39 @@ const ChatWidget = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
+                        ref={chatRef}
                         initial={{ opacity: 0, scale: 0.8, y: 50 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.8, y: 50 }}
-                        className="fixed bottom-24 right-6 w-[450px] max-w-[90vw] h-[500px] bg-primary/95 backdrop-blur-sm border border-accent/20 rounded-lg shadow-2xl z-40 flex flex-col"
+                        style={{
+                            width: `${dimensions.width}px`,
+                            height: `${dimensions.height}px`,
+                            maxWidth: '90vw',
+                            maxHeight: '80vh'
+                        }}
+                        className={`fixed bottom-24 right-6 bg-primary/95 backdrop-blur-sm border border-accent/20 rounded-lg shadow-2xl z-40 flex flex-col ${isResizing ? 'select-none' : ''}`}
                     >
+                        {/* Resize Handles */}
+                        {/* Left resize handle (width) */}
+                        <div
+                            className="absolute left-0 top-0 w-2 h-full cursor-ew-resize hover:bg-accent/20 transition-colors"
+                            onMouseDown={(e) => handleResizeStart(e, 'width')}
+                        />
+
+                        {/* Top resize handle (height) */}
+                        <div
+                            className="absolute top-0 left-0 w-full h-2 cursor-ns-resize hover:bg-accent/20 transition-colors"
+                            onMouseDown={(e) => handleResizeStart(e, 'height')}
+                        />
+
+                        {/* Corner resize handle (both) */}
+                        <div
+                            className="absolute top-0 left-0 w-4 h-4 cursor-nw-resize hover:bg-accent/30 transition-colors flex items-center justify-center"
+                            onMouseDown={(e) => handleResizeStart(e, 'both')}
+                        >
+                            <FiMaximize2 className="text-white/40 text-xs" />
+                        </div>
+
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b border-accent/20">
                             <div className="flex items-center gap-3">
@@ -151,15 +225,24 @@ const ChatWidget = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-white font-semibold">AI Assistant</h3>
-                                    <p className="text-white/60 text-xs">Ask me about Joseph</p>
+                                    <p className="text-white/60 text-xs">Ask me about Joseph • Resizable</p>
                                 </div>
                             </div>
-                            <button
-                                onClick={clearChat}
-                                className="text-white/60 hover:text-white text-sm transition-colors"
-                            >
-                                Clear
-                            </button>
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={clearChat}
+                                    className="text-white/60 hover:text-white text-sm transition-colors px-2 py-1 rounded"
+                                >
+                                    Clear
+                                </button>
+                                <button
+                                    onClick={() => setDimensions({ width: 450, height: 500 })}
+                                    className="text-white/60 hover:text-white text-xs transition-colors px-2 py-1 rounded"
+                                    title="Reset size"
+                                >
+                                    Reset
+                                </button>
+                            </div>
                         </div>
 
                         {/* Messages */}
@@ -180,10 +263,10 @@ const ChatWidget = () => {
 
                                     <div
                                         className={`max-w-[80%] p-3 rounded-lg ${message.isUser
-                                                ? 'bg-accent text-primary'
-                                                : message.isError
-                                                    ? 'bg-red-500/20 text-red-300 border border-red-500/30'
-                                                    : 'bg-white/10 text-white'
+                                            ? 'bg-accent text-primary'
+                                            : message.isError
+                                                ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                                                : 'bg-white/10 text-white'
                                             }`}
                                     >
                                         <p className="text-sm leading-relaxed">{message.text}</p>

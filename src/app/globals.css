@@ -23,4 +23,24 @@
   .text-outline-hover {
     -webkit-text-stroke: 1px #00d4ff;
   }
+
+  /* Chat widget resize handles */
+  .chat-resize-handle {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .chat-resize-handle:hover,
+  .chat-widget:hover .chat-resize-handle {
+    opacity: 1;
+  }
+
+  .chat-resizing {
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .chat-resizing * {
+    cursor: inherit !important;
+  }
 }
