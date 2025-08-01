@@ -67,33 +67,6 @@ const Contact = () => {
       publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
     });
 
-    // Debug: Check if EmailJS is loaded
-    console.log('EmailJS object:', emailjs);
-    console.log('EmailJS send function:', typeof emailjs.send);
-
-    // Debug: Log environment variables
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-    
-    console.log('EmailJS Config:', {
-      serviceId,
-      templateId,
-      publicKey,
-      hasService: !!serviceId,
-      hasTemplate: !!templateId,
-      hasKey: !!publicKey
-    });
-
-    // Check if credentials are still placeholders
-    if (!serviceId || serviceId.includes('PASTE_YOUR') || serviceId.includes('your_real')) {
-      console.error('❌ EmailJS credentials not properly configured!');
-      alert('Please configure EmailJS credentials in .env.local file');
-      setSubmitStatus('error');
-      setIsSubmitting(false);
-      return;
-    }
-
     try {
       // Validate required fields
       if (!formData.firstName || !formData.email || !formData.message) {
@@ -114,11 +87,19 @@ const Contact = () => {
 
       // Send notification email to you
       const result = await emailjs.send(
-        serviceId,
-        templateId,
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
         templateParams,
-        publicKey
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
+
+      // Send auto-reply to user (optional - you need to create this template)
+      // await emailjs.send(
+      //   process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+      //   'template_auto_reply', // Replace with your auto-reply template ID
+      //   templateParams,
+      //   process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      // );
 
       console.log('Email sent successfully:', result);
       setSubmitStatus('success');
@@ -134,29 +115,11 @@ const Contact = () => {
       });
     } catch (error) {
       console.error('Email send error:', error);
-      console.error('Error type:', error.constructor.name);
-      console.error('Error status:', error.status);
-      console.error('Error text:', error.text);
-      console.error('Full error object:', JSON.stringify(error, null, 2));
-      
-      // EmailJS specific error handling
-      if (error.status) {
-        console.error('HTTP Status:', error.status);
-        switch (error.status) {
-          case 400:
-            console.error('❌ Bad Request - Check your EmailJS configuration');
-            break;
-          case 401:
-            console.error('❌ Unauthorized - Invalid API key');
-            break;
-          case 404:
-            console.error('❌ Not Found - Invalid service or template ID');
-            break;
-          default:
-            console.error('❌ Unknown error status:', error.status);
-        }
-      }
-      
+      console.error('Error details:', {
+        message: error.message,
+        status: error.status,
+        text: error.text
+      });
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
