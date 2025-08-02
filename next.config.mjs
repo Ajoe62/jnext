@@ -6,7 +6,8 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
   },
   experimental: {
-    optimizePackageImports: ["framer-motion", "react-icons"],
+    // Explicitly disable CSS optimization to prevent critters requirement
+    optimizeCss: false,
   },
   // Performance optimizations
   poweredByHeader: false,
