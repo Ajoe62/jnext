@@ -1,11 +1,6 @@
 import { NextResponse } from 'next/server';
 import Groq from 'groq-sdk';
 
-// Initialize Groq client
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
-
 // System prompt that defines Joseph's AI assistant personality
 const SYSTEM_PROMPT = `You are an AI assistant for Joseph Akharume's portfolio website. Joseph is a skilled Software Engineer and Mobile & Web Developer.
 
@@ -42,6 +37,12 @@ export async function POST(request) {
         { status: 500 }
       );
     }
+
+    // Initialize Groq client ONLY when the API is called (not during build)
+    const groq = new Groq({
+      apiKey: apiKey,
+    });
+
     // Parse the request body
     const { message } = await request.json();
 
@@ -58,15 +59,6 @@ export async function POST(request) {
       return NextResponse.json(
         { error: 'Message too long. Please keep it under 1000 characters.' },
         { status: 400 }
-      );
-    }
-
-    // Check if API key is configured
-    if (!process.env.GROQ_API_KEY) {
-      console.error('GROQ_API_KEY is not configured');
-      return NextResponse.json(
-        { error: 'AI service is not properly configured' },
-        { status: 500 }
       );
     }
 
