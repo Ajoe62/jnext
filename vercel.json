@@ -1,19 +1,5 @@
 {
-  "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
   "installCommand": "npm ci",
-  "cacheMaxAge": 0,
-  "framework": "nextjs",
-  "devCommand": "npm run dev",
-  "functions": {
-    "app/**": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "build": {
-    "env": {
-      "NODE_VERSION": "20"
-    }
-  }
+  "framework": "nextjs"
 }

@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Temporarily disable static optimization to bypass the error
-  output: 'standalone',
-  trailingSlash: false,
-  generateStaticParams: false,
+  // Force fresh build - remove after successful deployment
+  generateBuildId: async () => 'build-' + Date.now(),
+  
+  images: {
+    formats: ["image/webp", "image/avif"],
+  },
+  poweredByHeader: false,
 };
 
 export default nextConfig;
