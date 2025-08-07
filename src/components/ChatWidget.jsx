@@ -174,7 +174,7 @@ const ChatWidget = () => {
                 whileTap={{ scale: 0.9 }}
             >
                 {isOpen ? (
-                    <FiX className="text-white text-xl" />
+                    <FiX className="text-slate-300 hover:text-slate-100 text-xl transition-colors" />
                 ) : (
                     <FiMessageCircle className="text-primary text-xl" />
                 )}
