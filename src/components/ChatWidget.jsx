@@ -167,7 +167,7 @@ const ChatWidget = () => {
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center z-50 transition-all duration-300 ${isOpen
-                    ? 'bg-red-500 hover:bg-red-600'
+                    ? 'bg-slate-700 hover:bg-slate-600'
                     : 'bg-accent hover:bg-accent/90'
                     }`}
                 whileHover={{ scale: 1.1 }}
