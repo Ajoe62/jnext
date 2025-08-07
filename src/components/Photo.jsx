@@ -25,16 +25,14 @@ const Photo = () => {
     absolute">
                     <Image
                         src="/assets/optimized/photo.webp"
-                        priority
-                        quality={100}
+                        priority={true}
+                        quality={90}
                         fill
                         sizes="(max-width: 768px) 298px, (max-width: 1280px) 398px, 498px"
                         alt="Joseph Akharume - Software Engineer"
                         className="object-contain"
                         placeholder="blur"
                         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAG0lEQVR42mP8/58BFTAhgzHgwag7Rt2BMgAA6xkFBSX7jP8AAAAASUVORK5CYII="
-                        loading="eager"
-                        fetchPriority="high"
                     />
                 </motion.div>
 

@@ -1,12 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Force fresh build - remove after successful deployment
-  generateBuildId: async () => 'build-' + Date.now(),
-  
+  reactStrictMode: true,
   images: {
     formats: ["image/webp", "image/avif"],
+    minimumCacheTTL: 31536000,
   },
   poweredByHeader: false,
+  compress: true,
+  // Ensure proper chunk loading
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      config.optimization.splitChunks.cacheGroups = {
+        default: false,
+        vendors: false,
+        // vendor chunk
+        vendor: {
+          chunks: "all",
+          test: /node_modules/,
+          name: "vendor",
+        },
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;

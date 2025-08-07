@@ -2,10 +2,10 @@
 
 import dynamic from 'next/dynamic';
 
-// Dynamically import ChatWidget to reduce initial bundle
-const ChatWidget = dynamic(() => import('./ChatWidget'), {
+// Dynamically import ChatWidget with better error handling
+const ChatWidget = dynamic(() => import('./ChatWidget').catch(() => ({ default: () => null })), {
     ssr: false,
-    loading: () => null
+    loading: () => null,
 });
 
 const ChatWidgetWrapper = () => {
