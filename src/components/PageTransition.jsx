@@ -1,5 +1,5 @@
 "use client";
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { usePathname } from "next/navigation";
 
 const PageTransition = ({ children }) => {
@@ -7,7 +7,7 @@ const PageTransition = ({ children }) => {
     return (
     <AnimatePresence>
         <div key={pathname}>
-            <motion.div
+            <m.div
             initial={{ opacity: 1 }}
             animate={{
                 opacity:0,

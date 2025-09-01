@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 //variants
 const stairAnimation = {
@@ -25,7 +25,7 @@ const Stairs = () => {
     <>
     {[...Array(6)].map((_, index) => {
         return (
-        <motion.div
+        <m.div
         key={index}
         variants={stairAnimation}
         initial="initial"

@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import Groq from 'groq-sdk';
 
 // System prompt that defines Joseph's AI assistant personality
 const SYSTEM_PROMPT = `You are an AI assistant for Joseph Akharume's portfolio website. Joseph is a skilled Software Engineer and Mobile & Web Developer.
@@ -25,6 +24,9 @@ If someone asks about pricing, timelines, or specific project details, politely 
 
 export async function POST(request) {
   try {
+    // Dynamically import Groq only when the function is executed
+    const Groq = (await import('groq-sdk')).default;
+    
     // Debug: Check if API key is loaded
     const apiKey = process.env.GROQ_API_KEY;
     console.log('API Key exists:', !!apiKey);

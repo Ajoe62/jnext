@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { FiMessageCircle, FiSend, FiUser, FiX, FiMaximize2 } from 'react-icons/fi';
 import { BsRobot } from 'react-icons/bs';
 
@@ -164,7 +164,7 @@ const ChatWidget = () => {
     return (
         <>
             {/* Chat Toggle Button */}
-            <motion.button
+            <m.button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center z-50 transition-all duration-300 ${isOpen
                     ? 'bg-slate-700 hover:bg-slate-600'
@@ -178,12 +178,12 @@ const ChatWidget = () => {
                 ) : (
                     <FiMessageCircle className="text-primary text-xl" />
                 )}
-            </motion.button>
+            </m.button>
 
             {/* Chat Window */}
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
+                    <m.div
                         ref={chatRef}
                         initial={{ opacity: 0, scale: 0.8, y: 50 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -248,7 +248,7 @@ const ChatWidget = () => {
                         {/* Messages */}
                         <div className="flex-1 overflow-y-auto p-4 space-y-4">
                             {messages.map((message) => (
-                                <motion.div
+                                <m.div
                                     key={message.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -277,12 +277,12 @@ const ChatWidget = () => {
                                             <FiUser className="text-white text-xs" />
                                         </div>
                                     )}
-                                </motion.div>
+                                </m.div>
                             ))}
 
                             {/* Loading indicator */}
                             {isLoading && (
-                                <motion.div
+                                <m.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     className="flex gap-3 justify-start"
@@ -297,7 +297,7 @@ const ChatWidget = () => {
                                             <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </m.div>
                             )}
 
                             <div ref={messagesEndRef} />
@@ -328,7 +328,7 @@ const ChatWidget = () => {
                                 <p className="text-red-400 text-xs mt-2">{error}</p>
                             )}
                         </form>
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
         </>

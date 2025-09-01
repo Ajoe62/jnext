@@ -1,10 +1,37 @@
-import { JetBrains_Mono } from 'next/font/google';
+import { JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
+import ClientOnly from "@/components/ClientOnly";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
-import ClientOnly from "@/components/ClientOnly";
-import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
+import DynamicChatWidget from "@/components/DynamicChatWidget";
+
+
+
+const geist = localFont({
+  src: [
+    {
+      path: './fonts/GeistVF.woff',
+      weight: '100 900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-geist',
+  display: 'swap',
+});
+
+const geistMono = localFont({
+  src: [
+    {
+      path: './fonts/GeistMonoVF.woff',
+      weight: '100 900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-geist-mono',
+  display: 'swap',
+});
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -13,30 +40,20 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Create Next App",
-  description: "Create Next App with Tailwind CSS",
+  title: 'JNext',
+  description: 'App layout',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <meta name="grammarly-disable-indicator" content="true" />
-        <meta name="grammarly-disable" content="true" />
-        <link
-          rel="preload"
-          as="image"
-          href="/assets/optimized/photo.webp"
-          type="image/webp"
-          fetchPriority="high"
-        />
-      </head>
-      <body className={jetbrainsMono.variable} suppressHydrationWarning={true}>
+      <head />
+      <body className={`${geist.variable} ${geistMono.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning={true}>
         <Header />
         <ClientOnly>
           <StairTransition />
           <PageTransition>{children}</PageTransition>
-          <ChatWidgetWrapper />
+          <DynamicChatWidget />
         </ClientOnly>
       </body>
     </html>
