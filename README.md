@@ -191,7 +191,7 @@ The contact form supports:
 - Multiple service selection
 - Real-time email delivery via EmailJS
 - Professional email templates
-- Form validation and error handling
+- Form validation and error handling in the project.
 
 ## 🎨 Customization
 
