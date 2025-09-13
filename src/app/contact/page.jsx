@@ -49,26 +49,35 @@ const Contact = () => {
                 </div>
 
                 {/* select */}
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a service" />
+                <div>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Select a service</SelectLabel>
-                        <SelectItem value="est">Web Developement</SelectItem>
-                        <SelectItem value="cst">UI/UX Design</SelectItem>
-                        <SelectItem value="mst">Logo Design</SelectItem>
+                        <SelectItem value="est">Web Development</SelectItem>
+                        <SelectItem value="cst">Mobile App Development</SelectItem>
+                        <SelectItem value="mst">UI/UX Design</SelectItem>
+                        <SelectItem value="bst">SEO Optimization</SelectItem>
                       </SelectGroup>
                     </SelectContent>
-                  </SelectTrigger>
-                </Select>
+                  </Select>
+                </div>
                 {/* textarea */}
-                <Textarea className="h-[200px]" placeholder="Type your message here." />
-
-                {/* button */}
-                <Button size="md" className="max-w-40">
-                  Send message
-                </Button>
+                <div>
+                  <Textarea
+                    className="h-[200px]"
+                    placeholder="Type your message here."
+                  />
+                </div>
+                {/* btn */}
+                <div>
+                  <Button size="md" className="max-w-40">
+                    Send message
+                  </Button>
+                </div>
               </form>
             </div>
             {/* info */}
@@ -85,7 +94,6 @@ const Contact = () => {
                         <h3 className='text-xl'>{item.description}</h3>
                       </div>
                     </li>
-
                   );
                 })}
               </ul>
@@ -94,7 +102,7 @@ const Contact = () => {
         </ScrollAnimation>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Contact;

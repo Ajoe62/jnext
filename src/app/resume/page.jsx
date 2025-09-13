@@ -5,7 +5,7 @@ import { SiTailwindcss, SiNextdotjs } from 'react-icons/si';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ScrollAnimation } from "@/components/ScrollAnimation";
+import { RevealElement } from "@/components/RevealElement";
 
 // about data
 const about = {
@@ -73,16 +73,24 @@ const Resume = () => {
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 xl:py-0">
       <div className="container mx-auto">
-        <ScrollAnimation>
+        <RevealElement>
           <Tabs
             defaultValue='experience'
             className='flex flex-col xl:flex-row gap-[60px]'
           >
             <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6">
-              <TabsTrigger value="experience">Experience</TabsTrigger>
-              <TabsTrigger value="education">Education</TabsTrigger>
-              <TabsTrigger value="skills">Skills</TabsTrigger>
-              <TabsTrigger value="about">About me</TabsTrigger>
+              <RevealElement direction="left" delay={100}>
+                <TabsTrigger value="experience">Experience</TabsTrigger>
+              </RevealElement>
+              <RevealElement direction="left" delay={200}>
+                <TabsTrigger value="education">Education</TabsTrigger>
+              </RevealElement>
+              <RevealElement direction="left" delay={300}>
+                <TabsTrigger value="skills">Skills</TabsTrigger>
+              </RevealElement>
+              <RevealElement direction="left" delay={400}>
+                <TabsTrigger value="about">About me</TabsTrigger>
+              </RevealElement>
             </TabsList>
 
             {/* content */}
@@ -90,19 +98,25 @@ const Resume = () => {
               {/* experience */}
               <TabsContent value="experience" className="w-full">
                 <div className='flex flex-col gap-[30px] text-center xl:text-left'>
-                  <h3 className='text-4xl font-bold'>{experience.title}</h3>
-                  <p className='max-w-[600px] text-white/60 mx-auto xl:mx-0'>{experience.description}</p>
+                  <RevealElement direction="up">
+                    <h3 className='text-4xl font-bold'>{experience.title}</h3>
+                  </RevealElement>
+                  <RevealElement direction="up" delay={100}>
+                    <p className='max-w-[600px] text-white/60 mx-auto xl:mx-0'>{experience.description}</p>
+                  </RevealElement>
                   <ScrollArea className="h-[400px]">
                     <ul className='grid grid-cols-1 lg:grid-cols-2 gap-[30px]'>
                       {experience.items.map((item, index) => (
-                        <li key={index} className='bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1'>
-                          <span className='text-accent'>{item.duration}</span>
-                          <h3 className='text-xl max-w-[260px] min-h-[60px] text-center lg:text-left'>{item.title}</h3>
-                          <div className='flex items-center gap-3'>
-                            <span className='w-[6px] h-[6px] rounded-full bg-accent'></span>
-                            <p>{item.company}</p>
-                          </div>
-                        </li>
+                        <RevealElement key={index} delay={index * 100 + 200} direction={index % 2 === 0 ? "left" : "right"}>
+                          <li className='bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1'>
+                            <span className='text-accent'>{item.duration}</span>
+                            <h3 className='text-xl max-w-[260px] min-h-[60px] text-center lg:text-left'>{item.title}</h3>
+                            <div className='flex items-center gap-3'>
+                              <span className='w-[6px] h-[6px] rounded-full bg-accent'></span>
+                              <p>{item.company}</p>
+                            </div>
+                          </li>
+                        </RevealElement>
                       ))}
                     </ul>
                   </ScrollArea>
@@ -112,19 +126,25 @@ const Resume = () => {
               {/* education */}
               <TabsContent value="education" className="w-full">
                 <div className='flex flex-col gap-[30px] text-center xl:text-left'>
-                  <h3 className='text-4xl font-bold'>{education.title}</h3>
-                  <p className='max-w-[600px] text-white/60 mx-auto xl:mx-0'>{education.description}</p>
+                  <RevealElement direction="up">
+                    <h3 className='text-4xl font-bold'>{education.title}</h3>
+                  </RevealElement>
+                  <RevealElement direction="up" delay={100}>
+                    <p className='max-w-[600px] text-white/60 mx-auto xl:mx-0'>{education.description}</p>
+                  </RevealElement>
                   <ScrollArea className="h-[400px]">
                     <ul className='grid grid-cols-1 lg:grid-cols-2 gap-[30px]'>
                       {education.items.map((item, index) => (
-                        <li key={index} className='bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1'>
-                          <span className='text-accent'>{item.duration}</span>
-                          <h3 className='text-xl max-w-[260px] min-h-[60px] text-center lg:text-left'>{item.degree}</h3>
-                          <div className='flex items-center gap-3'>
-                            <span className='w-[6px] h-[6px] rounded-full bg-accent'></span>
-                            <p>{item.institution}</p>
-                          </div>
-                        </li>
+                        <RevealElement key={index} delay={index * 100 + 200} direction={index % 2 === 0 ? "left" : "right"}>
+                          <li className='bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1'>
+                            <span className='text-accent'>{item.duration}</span>
+                            <h3 className='text-xl max-w-[260px] min-h-[60px] text-center lg:text-left'>{item.degree}</h3>
+                            <div className='flex items-center gap-3'>
+                              <span className='w-[6px] h-[6px] rounded-full bg-accent'></span>
+                              <p>{item.institution}</p>
+                            </div>
+                          </li>
+                        </RevealElement>
                       ))}
                     </ul>
                   </ScrollArea>
@@ -135,23 +155,29 @@ const Resume = () => {
               <TabsContent value="skills" className="w-full h-full">
                 <div className="flex flex-col gap-[30px]">
                   <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                    <h3 className="text-4xl font-bold">{skills.title}</h3>
-                    <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{skills.description}</p>
+                    <RevealElement direction="up">
+                      <h3 className="text-4xl font-bold">{skills.title}</h3>
+                    </RevealElement>
+                    <RevealElement direction="up" delay={100}>
+                      <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{skills.description}</p>
+                    </RevealElement>
                   </div>
                   <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:gap-[30px]">
                     {skills.skillList.map((skill, index) => (
-                      <li key={index}>
-                        <TooltipProvider delayDuration={100}>
-                          <Tooltip>
-                            <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
-                              <div className="text-6xl group-hover:text-accent transition-all duration-300">{skill.icon}</div>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p className="capitalize">{skill.name}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </li>
+                      <RevealElement key={index} delay={index * 80 + 200} direction="up">
+                        <li>
+                          <TooltipProvider delayDuration={100}>
+                            <Tooltip>
+                              <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
+                                <div className="text-6xl group-hover:text-accent transition-all duration-300">{skill.icon}</div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p className="capitalize">{skill.name}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </li>
+                      </RevealElement>
                     ))}
                   </ul>
                 </div>
@@ -160,21 +186,27 @@ const Resume = () => {
               {/* about */}
               <TabsContent value="about" className="w-full text-center xl:text-left">
                 <div className="flex flex-col gap-[30px]">
-                  <h3 className="text-4xl font-bold">{about.title}</h3>
-                  <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{about.description}</p>
+                  <RevealElement direction="up">
+                    <h3 className="text-4xl font-bold">{about.title}</h3>
+                  </RevealElement>
+                  <RevealElement direction="up" delay={100}>
+                    <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{about.description}</p>
+                  </RevealElement>
                   <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">
                     {about.info.map((item, index) => (
-                      <li key={index} className="flex items-center justify-center xl:justify-start gap-4">
-                        <span className="text-white/60">{item.fieldName}</span>
-                        <span className="text-xl">{item.fieldValue}</span>
-                      </li>
+                      <RevealElement key={index} delay={index * 50 + 200} direction="up">
+                        <li className="flex items-center justify-center xl:justify-start gap-4">
+                          <span className="text-white/60">{item.fieldName}</span>
+                          <span className="text-xl">{item.fieldValue}</span>
+                        </li>
+                      </RevealElement>
                     ))}
                   </ul>
                 </div>
               </TabsContent>
             </div>
           </Tabs>
-        </ScrollAnimation>
+        </RevealElement>
       </div>
     </div>
   );

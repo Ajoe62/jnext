@@ -1,13 +1,15 @@
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+
+// Import components
 import Header from "@/components/Header";
-import ClientOnly from "@/components/ClientOnly";
-import PageTransition from "@/components/PageTransition";
-import StairTransition from "@/components/StairTransition";
 import DynamicChatWidget from "@/components/DynamicChatWidget";
-
-
+import { AnimationProvider } from "@/components/AnimationProvider";
+import { PageTransition } from "@/components/PageTransition";
+// import ClientOnly from "@/components/ClientOnly";
+// import ErrorBoundary from "@/components/ErrorBoundary";
+// import StairTransition from "@/components/StairTransition";
 
 const geist = localFont({
   src: [
@@ -40,21 +42,24 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'JNext',
-  description: 'App layout',
+  title: "Joseph Akharume | Portfolio",
+  description: "Software Engineer | Mobile & Web Developer",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head />
-      <body className={`${geist.variable} ${geistMono.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning={true}>
-        <Header />
-        <ClientOnly>
-          <StairTransition />
-          <PageTransition>{children}</PageTransition>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className={`${geist.variable} ${geistMono.variable} ${jetbrainsMono.variable} bg-primary text-white`} suppressHydrationWarning={true}>
+        <AnimationProvider>
+          <Header />
+          <PageTransition>
+            {children}
+          </PageTransition>
           <DynamicChatWidget />
-        </ClientOnly>
+        </AnimationProvider>
       </body>
     </html>
   );

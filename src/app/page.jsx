@@ -1,60 +1,62 @@
-import { Button } from '@/components/ui/button';
-import { FiDownload } from 'react-icons/fi';
-import Social from '@/components/Social';
-import Photo from '@/components/Photo';
-import Stats from '@/components/Stats';
-import { ScrollAnimation } from "@/components/ScrollAnimation";
+import Photo from "@/components/Photo";
+import Social from "@/components/Social";
+import Stats from "@/components/Stats";
+import { Button } from "@/components/ui/button";
+import { FiDownload } from "react-icons/fi";
+import { RevealElement } from "@/components/RevealElement";
 
-const Home = () => {
+export default function Home() {
   return (
-    <section className='h-full'>
+    <section className="h-full">
       <div className="container mx-auto h-full">
-        <div className='flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24'>
+        <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
           {/* text */}
-          <div className='text-center xl:text-left order-2 xl:order-none'>
-            <ScrollAnimation>
-              <span>Software Engineer | Mobile & Web Developer</span>
-              <h1 className='h1 mb-6'>
-                Hello I'm <br /> <span className='text-accent'>Joseph Akharume</span>
+          <div className="text-center xl:text-left order-2 xl:order-none">
+            <RevealElement direction="left">
+              <span className="text-xl">Software Developer</span>
+            </RevealElement>
+
+            <RevealElement direction="left" delay={100}>
+              <h1 className="h1 mb-6">
+                Hello I&apos;m <br /> <span className="text-accent">Joseph Akharume</span>
               </h1>
-              <p className='max-w-[500px] mb-9 text-white/80'>
-                I bring ideas to life through immersive digital experiences, blending creativity with mastery in a wide array of programming languages and advanced technologies.
+            </RevealElement>
+
+            <RevealElement direction="left" delay={200}>
+              <p className="max-w-[500px] mb-9 text-white/80">
+                I excel at crafting elegant digital experiences and I am proficient in various programming languages and technologies.
               </p>
-            </ScrollAnimation>
+            </RevealElement>
+
             {/* btn and socials */}
-            <ScrollAnimation delay={0.4}>
-              <div className='flex flex-col xl:flex-row items-center gap-8'>
+            <RevealElement direction="up" delay={300}>
+              <div className="flex flex-col xl:flex-row items-center gap-8">
                 <Button
-                  variant='outline'
-                  size='lg'
+                  variant="outline"
+                  size="lg"
                   className="uppercase flex items-center gap-2"
                 >
                   <span>Download CV</span>
-                  <FiDownload className='text-xl' />
+                  <FiDownload className="text-xl" />
                 </Button>
-                <div className='mb-8 xl:mb-0'>
-                  <Social containerStyles="flex gap-6"
-                    iconStyles="w-9 h-9 border
-                   border-accent rounded-full flex justify-center items-center
-                   text-accent text-base hover:bg-accent hover:text-primary 
-                   hover:transition-all duration-500" />
+                <div className="mb-8 xl:mb-0">
+                  <Social
+                    containerStyles="flex gap-6"
+                    iconStyles="w-9 h-9 border border-accent rounded-full flex justify-center items-center text-accent text-base hover:bg-accent hover:text-primary hover:transition-all duration-500"
+                  />
                 </div>
               </div>
-            </ScrollAnimation>
+            </RevealElement>
           </div>
-
           {/* photo */}
-          <div className='order-1 xl:order-none mb-8 xl:mb-0'>
-            <ScrollAnimation delay={0.6}>
+          <div className="order-1 xl:order-none mb-8 xl:mb-0">
+            <RevealElement direction="right" delay={100}>
               <Photo />
-            </ScrollAnimation>
+            </RevealElement>
           </div>
         </div>
       </div>
-      <ScrollAnimation delay={0.8}>
-        <Stats />
-      </ScrollAnimation>
+      <Stats />
     </section>
   );
 }
-export default Home;

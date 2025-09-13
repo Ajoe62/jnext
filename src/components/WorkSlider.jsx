@@ -6,7 +6,8 @@ import 'swiper/css';
 import Image from 'next/image';
 import WorkSliderBtns from './WorkSliderBtns';
 
-const projects = [
+// Default projects if none are provided
+const defaultProjects = [
     {
         num: "01",
         category: "full-stack ",
@@ -42,7 +43,7 @@ const projects = [
     },
 ];
 
-const WorkSlider = ({ onSlideChange }) => {
+const WorkSlider = ({ projects = defaultProjects, onSlideChange }) => {
     return (
         <Swiper
             spaceBetween={30}

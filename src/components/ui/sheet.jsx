@@ -47,14 +47,21 @@ const sheetVariants = cva(
 const SheetContent = React.forwardRef(({ side = "right", className, children, ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay />
-    <SheetPrimitive.Content ref={ref} className={cn(sheetVariants({ side }), className)} {...props}>
+    <SheetPrimitive.Content
+      ref={ref}
+      className={cn(sheetVariants({ side }), className)}
+      {...props}
+      aria-describedby="sheet-description"
+    >
+      {/* Hidden title for accessibility */}
+      <SheetPrimitive.Title className="sr-only">Navigation Menu</SheetPrimitive.Title>
+      <div id="sheet-description" className="sr-only">Navigation links and menu options</div>
 
       {children}
       <SheetPrimitive.Close className="absolute right-8 top-8 transition-opacity outline-none">
         <IoMdClose className="text-3xl text-accent" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
-      {children}
     </SheetPrimitive.Content>
   </SheetPortal>
 ))

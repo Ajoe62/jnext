@@ -1,6 +1,5 @@
 "use client";
 
-import WorkSliderBtns from '@/components/WorkSliderBtns'
 import { useState } from 'react'
 import { BsArrowRight, BsArrowUpRight, BsGithub } from 'react-icons/bs';
 
@@ -116,13 +115,16 @@ const Work = () => {
                     </TooltipProvider>
                   </Link>
                 </div>
-
               </div>
             </div>
-            <div className='w-full xl:w-[50%]'>
-              <DynamicWorkSlider onSlideChange={handleSlideChange} />
+            <div className='w-full xl:w-[50%] flex flex-col justify-between items-center xl:items-end'>
+              <div className='w-full h-full flex items-center justify-center'>
+                <DynamicWorkSlider
+                  projects={projects}
+                  onSlideChange={handleSlideChange}
+                />
+              </div>
             </div>
-
           </div>
         </ScrollAnimation>
       </div>

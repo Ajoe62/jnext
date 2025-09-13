@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 // System prompt that defines Joseph's AI assistant personality
 const SYSTEM_PROMPT = `You are an AI assistant for Joseph Akharume's portfolio website. Joseph is a skilled Software Engineer and Mobile & Web Developer.
@@ -25,17 +25,20 @@ If someone asks about pricing, timelines, or specific project details, politely 
 export async function POST(request) {
   try {
     // Dynamically import Groq only when the function is executed
-    const Groq = (await import('groq-sdk')).default;
-    
+    const Groq = (await import("groq-sdk")).default;
+
     // Debug: Check if API key is loaded
     const apiKey = process.env.GROQ_API_KEY;
-    console.log('API Key exists:', !!apiKey);
-    console.log('API Key starts with gsk_:', apiKey?.startsWith('gsk_'));
-    
-    if (!apiKey || apiKey === 'gsk_PASTE_YOUR_ACTUAL_API_KEY_HERE') {
-      console.error('Groq API key is missing or not set properly');
+    console.log("API Key exists:", !!apiKey);
+    console.log("API Key starts with gsk_:", apiKey?.startsWith("gsk_"));
+
+    if (!apiKey || apiKey === "gsk_PASTE_YOUR_ACTUAL_API_KEY_HERE") {
+      console.error("Groq API key is missing or not set properly");
       return NextResponse.json(
-        { error: 'Groq API key is not configured properly. Please check your .env.local file.' },
+        {
+          error:
+            "Groq API key is not configured properly. Please check your .env.local file.",
+        },
         { status: 500 }
       );
     }
@@ -49,9 +52,9 @@ export async function POST(request) {
     const { message } = await request.json();
 
     // Validate the message
-    if (!message || typeof message !== 'string') {
+    if (!message || typeof message !== "string") {
       return NextResponse.json(
-        { error: 'Message is required and must be a string' },
+        { error: "Message is required and must be a string" },
         { status: 400 }
       );
     }
@@ -59,7 +62,7 @@ export async function POST(request) {
     // Limit message length to prevent abuse
     if (message.length > 1000) {
       return NextResponse.json(
-        { error: 'Message too long. Please keep it under 1000 characters.' },
+        { error: "Message too long. Please keep it under 1000 characters." },
         { status: 400 }
       );
     }
@@ -68,15 +71,15 @@ export async function POST(request) {
     const completion = await groq.chat.completions.create({
       messages: [
         {
-          role: 'system',
-          content: SYSTEM_PROMPT
+          role: "system",
+          content: SYSTEM_PROMPT,
         },
         {
-          role: 'user',
-          content: message
-        }
+          role: "user",
+          content: message,
+        },
       ],
-      model: 'llama3-8b-8192', // Fast and efficient model
+      model: "llama3-8b-8192", // Fast and efficient model
       temperature: 0.7, // Balanced creativity and consistency
       max_tokens: 500, // Reasonable response length
       top_p: 0.9,
@@ -88,7 +91,7 @@ export async function POST(request) {
 
     if (!aiResponse) {
       return NextResponse.json(
-        { error: 'No response generated' },
+        { error: "No response generated" },
         { status: 500 }
       );
     }
@@ -98,35 +101,36 @@ export async function POST(request) {
       response: aiResponse,
       timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
-    console.error('Groq API Error:', error);
+    console.error("Groq API Error:", error);
 
     // Handle specific Groq API errors
     if (error.status === 401) {
       return NextResponse.json(
-        { error: 'API authentication failed' },
+        { error: "API authentication failed" },
         { status: 500 }
       );
     }
 
     if (error.status === 429) {
       return NextResponse.json(
-        { error: 'Too many requests. Please wait a moment and try again.' },
+        { error: "Too many requests. Please wait a moment and try again." },
         { status: 429 }
       );
     }
 
     if (error.status === 400) {
       return NextResponse.json(
-        { error: 'Invalid request format' },
+        { error: "Invalid request format" },
         { status: 400 }
       );
     }
 
     // Generic error response
     return NextResponse.json(
-      { error: 'AI service is temporarily unavailable. Please try again later.' },
+      {
+        error: "AI service is temporarily unavailable. Please try again later.",
+      },
       { status: 500 }
     );
   }

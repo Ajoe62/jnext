@@ -6,7 +6,6 @@ import { NAV_LINKS } from '@/lib/constants';
 
 const Nav = () => {
     const pathname = usePathname();
-    console.log(pathname);
     return <nav className='flex gap-8'>
         {NAV_LINKS.map((link, index) => {
             return (
