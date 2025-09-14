@@ -3,10 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 // Import components
-import Header from "@/components/Header";
-import DynamicChatWidget from "@/components/DynamicChatWidget";
-import { AnimationProvider } from "@/components/AnimationProvider";
-import { PageTransition } from "@/components/PageTransition";
+import ClientLayout from "@/components/ClientLayout";
 // import ClientOnly from "@/components/ClientOnly";
 // import ErrorBoundary from "@/components/ErrorBoundary";
 // import StairTransition from "@/components/StairTransition";
@@ -53,13 +50,9 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`${geist.variable} ${geistMono.variable} ${jetbrainsMono.variable} bg-primary text-white`} suppressHydrationWarning={true}>
-        <AnimationProvider>
-          <Header />
-          <PageTransition>
-            {children}
-          </PageTransition>
-          <DynamicChatWidget />
-        </AnimationProvider>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

@@ -10,6 +10,13 @@ const nextConfig = {
   images: {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 31536000,
+    domains: [],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
   poweredByHeader: false,
   compress: true,

@@ -11,7 +11,7 @@ export default function Home() {
       <div className="container mx-auto h-full">
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
           {/* text */}
-          <div className="text-center xl:text-left order-2 xl:order-none">
+          <div className="text-center xl:text-left order-2 xl:order-none xl:max-w-[55%]">
             <RevealElement direction="left">
               <span className="text-xl">Software Developer</span>
             </RevealElement>
@@ -49,7 +49,7 @@ export default function Home() {
             </RevealElement>
           </div>
           {/* photo */}
-          <div className="order-1 xl:order-none mb-8 xl:mb-0">
+          <div className="order-1 xl:order-none mb-8 xl:mb-0 xl:w-[45%]">
             <RevealElement direction="right" delay={100}>
               <Photo />
             </RevealElement>

@@ -1,100 +1,178 @@
 "use client";
 
-import { useState } from 'react'
-import { BsArrowRight, BsArrowUpRight, BsGithub } from 'react-icons/bs';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import Link from 'next/link';
-import { ScrollAnimation } from '@/components/ScrollAnimation';
-import DynamicWorkSlider from '@/components/DynamicWorkSlider';
+// Mock ScrollAnimation component
+const ScrollAnimation = ({ children, delay }) => (
+  <div className="animate-fadeIn">{children}</div>
+);
 
-const projects = [
-  {
-    num: "01",
-    category: "full-stack ",
-    title: "Ecommerce Platform",
-    description:
-      "A full-stack e-commerce website (mvp). Features include user authenticiation, product search and filtering, cart management.",
-    stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Express.js" }, { name: "PostgreSql" }],
-    image: '/assets/work/techstore.png',
-    live: "",
-    github: "",
-  },
-  {
-    num: "02",
-    category: "full-stack ",
-    title: "Remote Job-search Platform",
-    description:
-      "A platform that connects remote job seekers with employers. Features include user authentication, job search and filtering, and job application.",
-    stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Firebase" }, { name: "Material-UI" }],
-    image: '/assets/work/remotelydev.png',
-    live: "",
-    github: "",
-  },
-  {
-    num: "03",
-    category: "full-stack ",
-    title: "Streambeat App",
-    description:
-      "A group calling app tha allows users to create virtual rooms. Features include video chat, screen sharing and real-time messaging.",
-    stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Django" }, { name: "Agora SDK" }],
-    image: '/assets/work/streambeat.png',
-    live: "",
-    github: "",
-  },
-];
+// Mock icons
+const BsArrowUpRight = () => <span className="text-2xl">↗️</span>;
+const BsGithub = () => <span className="text-2xl">🐙</span>;
 
-const Work = () => {
-  const [project, setProject] = useState(projects[0])
-  const handleSlideChange = (swiper) => {
-    // get current slide index
-    const currentIndex = swiper.activeIndex;
-    // update project state based on current slide index
-    setProject(projects[currentIndex])
-  }
+// Mock tooltip components
+const TooltipProvider = ({ children }) => <div>{children}</div>;
+const Tooltip = ({ children }) => <div className="relative group">{children}</div>;
+const TooltipTrigger = ({ children, className }) => (
+  <div className={`${className} cursor-pointer`}>{children}</div>
+);
+const TooltipContent = ({ children }) => (
+  <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-10">
+    {children}
+  </div>
+);
+
+// Mock Link component
+const Link = ({ href, children }) => (
+  <a href={href} className="inline-block">{children}</a>
+);
+
+// Mock DynamicWorkSlider component
+const DynamicWorkSlider = ({ projects, onSlideChange }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    const newIndex = (currentIndex + 1) % projects.length;
+    setCurrentIndex(newIndex);
+    if (onSlideChange) {
+      onSlideChange({ activeIndex: newIndex });
+    }
+  };
+
+  const prevSlide = () => {
+    const newIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+    if (onSlideChange) {
+      onSlideChange({ activeIndex: newIndex });
+    }
+  };
 
   return (
-    <section
-      className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
-    >
-      <div className="container mx-auto">
-        <ScrollAnimation>
+    <div className="relative w-full max-w-md">
+      <div className="bg-[#232329] rounded-lg p-4 h-80 flex items-center justify-center relative">
+        <div className="relative w-full h-64">
+          <Image
+            src={projects[currentIndex].image}
+            alt={projects[currentIndex].title}
+            width={400}
+            height={300}
+            style={{ objectFit: 'contain' }}
+            className="rounded"
+            unoptimized={true}
+          />
+        </div>
+      </div>
+      <div className="flex justify-between mt-4">
+        <button
+          onClick={prevSlide}
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+        >
+          ← Prev
+        </button>
+        <div className="flex space-x-2 items-center">
+          {projects.map((_, index) => (
+            <div
+              key={index}
+              className={`w-2 h-2 rounded-full ${currentIndex === index ? 'bg-green-500' : 'bg-gray-500'}`}
+            />
+          ))}
+        </div>
+        <button
+          onClick={nextSlide}
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+        >
+          Next →
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Work component
+const WorkComponent = () => {
+  const projects = [
+    {
+      num: "01",
+      category: "full-stack ",
+      title: "Ecommerce Platform",
+      description: "A full-stack e-commerce website (mvp). Features include user authentication, product search and filtering, cart management.",
+      stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Express.js" }, { name: "PostgreSql" }],
+      image: '/assets/work/techstore.png',
+      live: "#",
+      github: "#",
+    },
+    {
+      num: "02",
+      category: "full-stack ",
+      title: "Remote Job-search Platform",
+      description: "A platform that connects remote job seekers with employers. Features include user authentication, job search and filtering, and job application.",
+      stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Firebase" }, { name: "Material-UI" }],
+      image: '/assets/work/remotelydev.PNG',
+      live: "#",
+      github: "#",
+    },
+    {
+      num: "03",
+      category: "full-stack ",
+      title: "Streambeat App",
+      description: "A group calling app that allows users to create virtual rooms. Features include video chat, screen sharing and real-time messaging.",
+      stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Django" }, { name: "Agora SDK" }],
+      image: '/assets/work/streambeat.PNG',
+      live: "#",
+      github: "#",
+    },
+  ];
+
+  const [project, setProject] = useState(projects[0]);
+
+  const handleSlideChange = (swiper) => {
+    const currentIndex = swiper.activeIndex;
+    setProject(projects[currentIndex]);
+  };
+
+  return (
+    <section className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0 bg-[#1b1b1f] text-white">
+      <div className="container mx-auto px-4">
+        <ScrollAnimation delay={0.1}>
           <div className='flex flex-col xl:flex-row xl:gap-[30px]'>
             <div className='w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none'>
               <div className='flex flex-col gap-[30px] h-[50%]'>
                 {/* outline num */}
-                <div className='text-8xl leading-none front-extrabold text-transparent text-outline'>
+                <div className='text-8xl leading-none font-extrabold text-transparent bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text'>
                   {project.num}
                 </div>
+
                 {/* project category */}
-                <h2 className='text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize'>
+                <h2 className='text-[42px] font-bold leading-none text-white group-hover:text-green-500 transition-all duration-500 capitalize'>
                   {project.category}
                   project
                 </h2>
+
                 {/* project description */}
                 <p className='text-white/60'>{project.description}</p>
-                {/* stack */}
-                <ul className='flex gap-4'>
-                  {project.stack.map((item, index) => {
-                    return (
-                      <li key={index} className='text-xl text-accent'>
-                        {item.name}
-                        {/* remove the last comma from the list */}
-                        {index !== project.stack.length - 1 && ","}
-                      </li>
-                    );
-                  })}
 
+                {/* stack */}
+                <ul className='flex flex-wrap gap-4'>
+                  {project.stack.map((item, index) => (
+                    <li key={index} className='text-xl text-green-500'>
+                      {item.name}
+                      {index !== project.stack.length - 1 && ","}
+                    </li>
+                  ))}
                 </ul>
+
                 {/* border */}
-                <div className='border border-white/20'> </div>
-                {/* button */}
+                <div className='border border-white/20'></div>
+
+                {/* buttons */}
                 <div className='flex items-center gap-4'>
                   <Link href={project.live}>
-                    <TooltipProvider delayDuration={100}>
+                    <TooltipProvider>
                       <Tooltip>
-                        <TooltipTrigger className='w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group'>
-                          <BsArrowUpRight className='text-white text-3xl group-hover:text-accent' />
+                        <TooltipTrigger className='w-[70px] h-[70px] rounded-full bg-white/5 hover:bg-green-500/20 flex justify-center items-center group transition-colors'>
+                          <BsArrowUpRight />
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>Live project</p>
@@ -102,11 +180,12 @@ const Work = () => {
                       </Tooltip>
                     </TooltipProvider>
                   </Link>
+
                   <Link href={project.github}>
-                    <TooltipProvider delayDuration={100}>
+                    <TooltipProvider>
                       <Tooltip>
-                        <TooltipTrigger className='w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group'>
-                          <BsGithub className='text-white text-3xl group-hover:text-accent' />
+                        <TooltipTrigger className='w-[70px] h-[70px] rounded-full bg-white/5 hover:bg-green-500/20 flex justify-center items-center group transition-colors'>
+                          <BsGithub />
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>Github repository</p>
@@ -117,6 +196,7 @@ const Work = () => {
                 </div>
               </div>
             </div>
+
             <div className='w-full xl:w-[50%] flex flex-col justify-between items-center xl:items-end'>
               <div className='w-full h-full flex items-center justify-center'>
                 <DynamicWorkSlider
@@ -130,6 +210,6 @@ const Work = () => {
       </div>
     </section>
   );
-}
+};
 
-export default Work;
+export default WorkComponent;

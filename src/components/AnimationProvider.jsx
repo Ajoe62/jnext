@@ -19,13 +19,23 @@ export function AnimationProvider({ children }) {
         setLoaded(true);
 
         // Check for reduced motion preference
-        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        setPrefersReducedMotion(mediaQuery.matches);
+        if (typeof window !== 'undefined') {
+            const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+            setPrefersReducedMotion(mediaQuery.matches);
 
-        // Listen for preference changes
-        const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
-        mediaQuery.addEventListener("change", handleChange);
-        return () => mediaQuery.removeEventListener("change", handleChange);
+            // Listen for preference changes
+            const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+
+            // Use the appropriate event listener method based on browser support
+            if (mediaQuery.addEventListener) {
+                mediaQuery.addEventListener("change", handleChange);
+                return () => mediaQuery.removeEventListener("change", handleChange);
+            } else {
+                // Fallback for older browsers
+                mediaQuery.addListener(handleChange);
+                return () => mediaQuery.removeListener(handleChange);
+            }
+        }
     }, []);
 
     return (

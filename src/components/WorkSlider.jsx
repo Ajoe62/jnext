@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import Image from 'next/image';
 import WorkSliderBtns from './WorkSliderBtns';
 
@@ -58,7 +59,14 @@ const WorkSlider = ({ projects = defaultProjects, onSlideChange }) => {
                         <div className='absolute top-0 bottom-0 w-full bg-black/10 z-10'></div>
                         {/* image */}
                         <div className='relative w-full h-full'>
-                            <Image src={project.image} fill className='object-cover' alt={project.title} sizes="(max-width: 1200px) 100vw, 50vw" />
+                            <Image
+                                src={project.image}
+                                fill
+                                className='object-cover'
+                                alt={project.title}
+                                sizes="(max-width: 1200px) 100vw, 50vw"
+                                priority
+                            />
                         </div>
                     </div>
                 </SwiperSlide>

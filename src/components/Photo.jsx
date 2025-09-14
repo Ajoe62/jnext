@@ -5,9 +5,9 @@ import Image from "next/image";
 const Photo = () => {
     return (
         <div className="w-full h-full relative overflow-visible">
-            <div className="w-full h-full flex justify-center items-center relative">
+            <div className="w-full h-full flex justify-start items-center relative">
                 {/* profile image */}
-                <div className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute overflow-hidden rounded-full border-2 border-accent/20">
+                <div className="w-[250px] h-[250px] xl:w-[380px] xl:h-[380px] absolute overflow-hidden rounded-full border-2 border-accent/20 left-[10%] sm:left-[15%] md:left-[20%] lg:left-0 xl:left-[10%]">
                     <Image
                         src="/assets/photo.jpg"
                         priority={true}
@@ -28,7 +28,7 @@ const Photo = () => {
                 </div>
 
                 {/* circle - simplified without animation */}
-                <svg className="absolute w-[310px] xl:w-[516px] h-[310px] xl:h-[516px] z-10"
+                <svg className="absolute w-[262px] xl:w-[398px] h-[262px] xl:h-[398px] z-10 left-[10%] sm:left-[15%] md:left-[20%] lg:left-0 xl:left-[10%]"
                     viewBox="0 0 506 506"
                     xmlns="http://www.w3.org/2000/svg"
                 >
@@ -41,7 +41,7 @@ const Photo = () => {
                 </svg>
 
                 {/* Fallback div in case the image doesn't load */}
-                <div className="absolute w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] bg-gradient-to-br from-accent/30 to-primary rounded-full opacity-30 z-5"></div>
+                <div className="absolute w-[250px] h-[250px] xl:w-[380px] xl:h-[380px] bg-gradient-to-br from-accent/30 to-primary rounded-full opacity-30 z-5 left-[10%] sm:left-[15%] md:left-[20%] lg:left-0 xl:left-[10%]"></div>
             </div>
         </div>
     );
