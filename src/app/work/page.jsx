@@ -67,7 +67,7 @@ const DynamicWorkSlider = ({ projects, onSlideChange }) => {
       <div className="flex justify-between mt-4">
         <button
           onClick={prevSlide}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+          className="px-4 py-2 bg-accent text-white rounded hover:bg-accent transition-colors"
         >
           ← Prev
         </button>
@@ -75,13 +75,13 @@ const DynamicWorkSlider = ({ projects, onSlideChange }) => {
           {projects.map((_, index) => (
             <div
               key={index}
-              className={`w-2 h-2 rounded-full ${currentIndex === index ? 'bg-green-500' : 'bg-gray-500'}`}
+              className={`w-2 h-2 rounded-full ${currentIndex === index ? 'bg-accent' : 'bg-gray-500'}`}
             />
           ))}
         </div>
         <button
           onClick={nextSlide}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+          className="px-4 py-2 bg-accent text-white rounded hover:bg-accent-600 transition-colors"
         >
           Next →
         </button>
@@ -140,12 +140,12 @@ const WorkComponent = () => {
             <div className='w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none'>
               <div className='flex flex-col gap-[30px] h-[50%]'>
                 {/* outline num */}
-                <div className='text-8xl leading-none font-extrabold text-transparent bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text'>
+                <div className='text-8xl leading-none font-extrabold text-transparent bg-gradient-to-r from-accent-hover to-blue-500 bg-clip-text'>
                   {project.num}
                 </div>
 
                 {/* project category */}
-                <h2 className='text-[42px] font-bold leading-none text-white group-hover:text-green-500 transition-all duration-500 capitalize'>
+                <h2 className='text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize'>
                   {project.category}
                   project
                 </h2>
@@ -156,7 +156,7 @@ const WorkComponent = () => {
                 {/* stack */}
                 <ul className='flex flex-wrap gap-4'>
                   {project.stack.map((item, index) => (
-                    <li key={index} className='text-xl text-green-500'>
+                    <li key={index} className='text-xl text-accent'>
                       {item.name}
                       {index !== project.stack.length - 1 && ","}
                     </li>
