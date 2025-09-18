@@ -47,6 +47,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`${geist.variable} ${geistMono.variable} ${jetbrainsMono.variable} bg-primary text-white`} suppressHydrationWarning={true}>

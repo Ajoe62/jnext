@@ -11,12 +11,12 @@ import WorkSliderBtns from './WorkSliderBtns';
 const defaultProjects = [
     {
         num: "01",
-        category: "yea-impact-Youth Empowerment Platform",
-        title: "yea-impact - Youth Empowerment Platform",
+        category: "yea - Youth Empowerment Platform",
+        title: "yea - Youth Empowerment Platform",
         description:
             "A comprehensive full-stack web application for Youth Empowerment and Advocacy. Built with Next.js 15, Supabase, and TypeScript. The app is built using the Next.js App Router and Supabase to provide a full‑stack experience with authentication, database interactions, and real‑time updates",
         stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" },{name: "typescript" }, { name: "postgresql" }],
-        image: '/assets/work/yea-impact.png',
+        image: '/assets/work/yea.png',
         live: "https://yea-impact.vercel.app",
         github: "https://github.com/Ajoe62/yea-impact",
     },
