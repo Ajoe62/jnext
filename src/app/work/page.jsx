@@ -2,15 +2,13 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { BsArrowUpRight } from "react-icons/bs";
+import { BsGithub } from "react-icons/bs";
 
 // Mock ScrollAnimation component
 const ScrollAnimation = ({ children, delay }) => (
   <div className="animate-fadeIn">{children}</div>
 );
-
-// Mock icons
-const BsArrowUpRight = () => <span className="text-2xl">↗️</span>;
-const BsGithub = () => <span className="text-2xl">🐙</span>;
 
 // Mock tooltip components
 const TooltipProvider = ({ children }) => <div>{children}</div>;
@@ -93,38 +91,38 @@ const DynamicWorkSlider = ({ projects, onSlideChange }) => {
 // Work component
 const WorkComponent = () => {
   const projects = [
-     {
-        num: "01",
-        category: "Yea Impact ",
-        title: "yea-impact - Youth Empowerment Platform",
-        description:
-            "A comprehensive full-stack web application for Youth Empowerment and Advocacy. Built with Next.js 15, Supabase, and TypeScript. The app is built using the Next.js App Router and Supabase to provide a full‑stack experience with authentication, database interactions, and real‑time updates",
-        stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" },{name: "typescript" }, { name: "postgresql" }],
-        image: '/assets/work/yea-impact.png',
-        live: "https://yea-impact.vercel.app",
-        github: "https://github.com/Ajoe62/yea-impact",
+    {
+      num: "01",
+      category: "Yea Impact ",
+      title: "yea-impact - Youth Empowerment Platform",
+      description:
+        "A comprehensive full-stack web application for Youth Empowerment and Advocacy. Built with Next.js 15, Supabase, and TypeScript. The app is built using the Next.js App Router and Supabase to provide a full‑stack experience with authentication, database interactions, and real‑time updates",
+      stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" }, { name: "typescript" }, { name: "postgresql" }],
+      image: '/assets/work/yea-impact.png',
+      live: "https://yea-impact.vercel.app",
+      github: "https://github.com/Ajoe62/yea-impact",
     },
     {
-        num: "02",
-        category: "Nexscholar - Scholarship Management System",
-        title: "Nexscholar - Scholarship Management System",
-        description:
-            "A comprehensive scholarship management platform built with Next.js 15, Supabase, and TypeScript.To be deployed",
-        stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" },{name: "typescript" }, { name: "postgresql" }],
-        image: '/assets/work/nexscholar.png',
-        live: "https://nexscholar.vercel.app",
-        github: "https://github.com/Ajoe62/nexscholar",
+      num: "02",
+      category: "Nexscholar - Scholarship Management System",
+      title: "Nexscholar - Scholarship Management System",
+      description:
+        "A comprehensive scholarship management platform built with Next.js 15, Supabase, and TypeScript.To be deployed",
+      stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" }, { name: "typescript" }, { name: "postgresql" }],
+      image: '/assets/work/nexscholar.png',
+      live: "https://nexscholar.vercel.app",
+      github: "https://github.com/Ajoe62/nexscholar",
     },
     {
-        num: "03",
-        category: "Uswift - Job Application Automation",
-        title: "Job Application Automation",
-        description:
-            "A comprehensive job application automation platform built with Next.js 15, Supabase, and TypeScript. To be deployed",
-        stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" },{name: "typescript" }, { name: "postgresql" }],
-        image: '/assets/work/nexscholar.png',
-        live: "",
-        github: "https://github.com/Ajoe62/Uswift",
+      num: "03",
+      category: "Uswift - Job Application Automation",
+      title: "Job Application Automation",
+      description:
+        "A comprehensive job application automation platform built with Next.js 15, Supabase, and TypeScript. To be deployed",
+      stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" }, { name: "typescript" }, { name: "postgresql" }],
+      image: '/assets/work/nexscholar.png',
+      live: "",
+      github: "https://github.com/Ajoe62/Uswift",
     },
     {
       num: "04",
