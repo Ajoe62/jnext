@@ -48,7 +48,7 @@ export default function Home() {
           {/* photo */}
           <div className="w-full xl:w-[45%] flex justify-center mb-8 xl:mb-0">
             <RevealElement direction="right" delay={100}>
-              <div className="relative h-[340px] w-[340px] md:h-[4200px] md:w-[420px] xl:h-[520px] xl:w-[520px] flex items-center justify-center mx-auto">
+              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl aspect-square flex items-center justify-center mx-auto">
                 <Photo />
               </div>
             </RevealElement>
