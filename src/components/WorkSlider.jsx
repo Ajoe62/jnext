@@ -11,36 +11,69 @@ import WorkSliderBtns from './WorkSliderBtns';
 const defaultProjects = [
     {
         num: "01",
-        category: "full-stack ",
+        category: "yea-impact-Youth Empowerment Platform",
+        title: "yea-impact - Youth Empowerment Platform",
+        description:
+            "A comprehensive full-stack web application for Youth Empowerment and Advocacy. Built with Next.js 15, Supabase, and TypeScript. The app is built using the Next.js App Router and Supabase to provide a full‑stack experience with authentication, database interactions, and real‑time updates",
+        stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" },{name: "typescript" }, { name: "postgresql" }],
+        image: '/assets/work/yea-impact.png',
+        live: "https://yea-impact.vercel.app",
+        github: "https://github.com/Ajoe62/yea-impact",
+    },
+    {
+        num: "02",
+        category: "Nexscholar - Scholarship Management System",
+        title: "Nexscholar - Scholarship Management System",
+        description:
+            "A comprehensive scholarship management platform built with Next.js 15, Supabase, and TypeScript.To be deployed",
+        stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" },{name: "typescript" }, { name: "postgresql" }],
+        image: '/assets/work/nexscholar.png',
+        live: "https://nexscholar.vercel.app",
+        github: "https://github.com/Ajoe62/nexscholar",
+    },
+    {
+        num: "03",
+        category: "Uswift Chrome Extension",
+        title: "Uswift Chrome Extension",
+        description:
+            "USwift Auto-Apply feature is the most advanced job application automation system available. It combines AI-powered form detection, intelligent field mapping, and adaptive strategies to automatically fill and submit job applications across 25+ major job boards",
+        stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "Nextjs" }, { name: "Express.js" }, { name: "supabase" }],
+        image: '/assets/work/uswift.png',
+        live: "",
+        github: "https://github.com/Ajoe62/uswift",
+    },
+    {
+        num: "04",
+        category: "Ecommerce Platform",
         title: "Ecommerce Platform",
         description:
             "A full-stack e-commerce website (mvp). Features include user authenticiation, product search and filtering, cart management.",
         stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Express.js" }, { name: "PostgreSql" }],
         image: '/assets/work/techstore.png',
         live: "",
-        github: "",
+        github: "https://github.com/Ajoe62/techstore",
     },
     {
-        num: "02",
-        category: "full-stack ",
+        num: "05",
+        category: "Remote Job-search Platform",
         title: "Remote Job-search Platform",
         description:
             "A platform that connects remote job seekers with employers. Features include user authentication, job search and filtering, and job application.",
         stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Firebase" }, { name: "Material-UI" }],
         image: '/assets/work/remotelydev.png',
-        live: "",
-        github: "",
+        live: "https://remotelydev.vercel.app",
+        github: "https://github.com/Ajoe62/remotelydev",
     },
     {
-        num: "03",
-        category: "full-stack ",
+        num: "06",
+        category: "Streambeat App",
         title: "Streambeat App",
         description:
             "A group calling app tha allows users to create virtual rooms. Features include video chat, screen sharing and real-time messaging.",
         stack: [{ name: "Html 5" }, { name: "Tailwindcss" }, { name: "React" }, { name: "Django" }, { name: "Agora SDK" }],
         image: '/assets/work/streambeat.png',
         live: "",
-        github: "",
+        github: "https://www.github.com/Ajoe62/streambeat",
     },
 ];
 
